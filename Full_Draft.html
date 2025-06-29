@@ -1,212 +1,318 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Draft page</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Draft page </title>
-</head>
-
-<body>
-    <Section id="menu">
-        <button onclick="myFunction_hidden('CorporateLogin_Screen')">تسجيل الدخول</button>
-        <button onclick="myFunction_hidden('OTP_Screen')">رمز التحقق OTP</button>
-        <button onclick="myFunction_hidden('Authorized_Training_Center_Screen')">
-                        تسجيل / تحديث بيانات جهات التدريب
-        </button>
-       <!-- <button onclick="myFunction_hidden('target_section')"></button>-->
-    </Section>
-    <section id="CorporateLogin_Screen" style="display: none;">
-        <center>
-            <h1>دخول جهات التدريب</h1>
-            <fieldset>
-                <div class="container" id="CorporateLogin">
-                    <label for="uname"><b>اسم المستخدم</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
-                    <br>
-                    <label for="upass"><b>كلمة المرور</b></label>
-                    <input type="password" placeholder="Enter Password" name="upass" required>
-                    <br>
-                    <button type="submit">تسجيل الدخول</button>
-                </div>
-            </fieldset>
-        </center>
+  <body>
+    <section id="menu">
+      <button onclick="myFunction_hidden('CorporateLogin_Screen')">
+        تسجيل الدخول
+      </button>
+      <button onclick="myFunction_hidden('OTP_Screen')">رمز التحقق OTP</button>
+      <button onclick="myFunction_hidden('Authorized_Training_Center_Screen')">
+        تسجيل / تحديث بيانات جهات التدريب
+      </button>
+      <button onclick="myFunction_hidden('Courses_Screen')">
+        إدارة التديب
+      </button>
+      <!-- <button onclick="myFunction_hidden('target_section')"></button>-->
     </section>
-    <br>
-    <section id="OTP_Screen" style="display: none;">
-        <center>
-            <h1>رمز التحقق OTP</h1>
-            <fieldset>
-                <div class="container" id="CorporateOtp">
-                    <label for="usmsotp"><b>OTP رقم الهاتف</b></label>
-                    <input type="text" placeholder="Enter SMS OTP" name="usmsotp" required>
-                    <button type="submit" id="btn_smsotp">تحقق SMS</button>
-                    <br>
-                    <label for="uemailotp"><b>OTP البريد الالكتروني</b></label>
-                    <input type="text" placeholder="Enter Email OTP" name="uemailotp" required>
-                    <button type="submit" id="btn_emailotp">تحقق Email</button>
-                </div>
-            </fieldset>
-        </center>
+    <section id="CorporateLogin_Screen" style="display: none">
+      <center>
+        <h1>دخول جهات التدريب</h1>
+        <fieldset>
+          <div class="container" id="CorporateLogin">
+            <label for="uname"><b>اسم المستخدم</b></label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              name="uname"
+              required
+            />
+            <br />
+            <label for="upass"><b>كلمة المرور</b></label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="upass"
+              required
+            />
+            <br />
+            <button type="submit">تسجيل الدخول</button>
+          </div>
+        </fieldset>
+      </center>
     </section>
-
-    <section id="Authorized_Training_Center_Screen" style="display: none;">
-        <center>
-            <h1>تسجيل / تحديث بيانات جهات التدريب</h1>
-            <p>يرجى تعبأة البيانات كاملة وسيتم التواصل خلال 15 يوم عمل.</p>
-        </center>
-
-        <div class="container" id="Authorized_Training_Center" dir="rtl">
-            <form action="/#">
-                <!--based info-->
-                <fieldset>
-                    <legend><b>المعلومات الاساسية</b></legend>
-                    <label for="ucorporateName"><b>اسم الجهة</b></label>
-                    <input type="text" placeholder="Enter Corporate Name" name="ucorporateName" required>
-                    <br>
-                    <label for="ucorporateCommerialNumber"><b>الرقم التجاري</b></label>
-                    <input type="text" placeholder="Enter Corporate Name" name="ucorporateCommerialNumber" required>
-                    <br>
-                    <label for="ucorporateCivilID"><b>الرقم المدني</b></label>
-                    <input type="text" placeholder="Enter Corporate Civil ID" name="ucorporateCivilID" required>
-                    <br>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <legend><b>
-                            رفع المستندات
-                        </b>
-                    </legend>
-                    <!--وزارة التجارة-->
-                    <label>Upload - الرخصة التجارية من وزارة التجارة والصناعة</label><br>
-                    <input type="file" id="myFile" name="filename">
-
-                    <br>
-                    <!--وزارة العدل-->
-                    <label>Upload - شهادة عقد التأسيس والترخيص من وزارة العدل</label><br>
-                    <input type="file" id="myFile" name="filename">
-
-                    <br>
-                    <!--الهيئة العاملة للمعلومات المدنية -->
-                    <label>Upload - شهادة من الهيئة العامة للمعلومات المدنية (الرقم المدني)</label><br>
-                    <input type="file" id="myFile" name="filename">
-                </fieldset>
-
-                <fieldset>
-                    <legend>
-                        <b>
-                            طبيعة النشاط
-                        </b>
-                    </legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" id="Traingings_management">
-                            دورات ادارية
-
-                        </li>
-                        <li>
-                            <input type="checkbox" id="Traingings_engineering">
-                            دورات هندسية
-
-                        </li>
-                        <li>
-                            <input type="checkbox" id="Traingings_technology">
-                            دورات تكنولوجية
-
-                        </li>
-                        <li>
-                            <input type="checkbox" id="Traingings_financial">
-                            دورات مالية
-
-                        </li>
-                    </ul>
-
-                </fieldset>
-            </form>
-            <fieldset>
-                <legend>
-                    <b>
-                        العنوان
-                    </b>
-                </legend>
-                <input type="text" placeholder="المنطقة" id="myArea" name="area"> <br>
-                <input type="text" placeholder="القطعة" id="myArea" name="area"> <br>
-                <input type="text" placeholder="الشارع" id="myArea" name="area"> <br>
-                <input type="text" placeholder="القطعة" id="myArea" name="area"> <br>
-            </fieldset>
-
-            <fieldset>
-                <legend>
-                    <b>
-                        المعلومات البنكية
-                    </b>
-                </legend>
-                <input type="text" placeholder="رقم الحساب البنكي بصيغة الايبان" id="myIBAN" name="IBAN"> <br>
-                <!--المعلومات البنكية-->
-                <label>Upload - رقم الحساب البنكي بصيغة الايبان</label><br>
-                <input type="file" id="myFile" name="filename">
-            </fieldset>
-
-            <br>
-
-            <fieldset>
-                <legend>
-                    <b>
-                        بيانات التواصل (الايميل)
-                    </b>
-                </legend>
-
-                <!--Contact person 1-->
-                <fieldset>
-                    <legend> ضابط الاتصال الاول</legend>
-                       <input type="text" placeholder="الرقم المدني  ضابط الاتصال" id="myContactPerson_civil-ID_1"
-                        name="ContactPerson_civil-ID_1"> <br>
-                    <input type="text" placeholder="اسم ضابط الاتصال" id="myContactPerson_name_1"
-                        name="ContactPerson_name_1"> <br>
-                    <input type="text" placeholder="رقم ضابط الاتصال" id="myContactPerson_phone_1"
-                        name="ContactPerson_phone_1"> <br>
-                    <input type="email" placeholder="البريد الالكتروني لضابط الاتصال" id="myContactPerson_email_1"
-                        name="ContactPerson_email_1"> <br>
-                </fieldset>
-
-                <!--Contact person 2-->
-                <fieldset>
-                    <legend> ضابط الاتصال الثاني</legend>
-                    <input type="text" placeholder="الرقم المدني لضابط الاتصال" id="myContactPerson_civil-ID_2"
-                        name="ContactPerson_civil-ID_2"> <br>
-                    <input type="text" placeholder="اسم ضابط الاتصال" id="myContactPerson_name_2"
-                        name="ContactPerson_name_2"> <br>
-                    <input type="text" placeholder="رقم ضابط الاتصال" id="myContactPerson_phone_2"
-                        name="ContactPerson_phone_2"> <br>
-                    <input type="email" placeholder="البريد الالكتروني لضابط الاتصال" id="myContactPerson_email_2"
-                        name="ContactPerson_email_2"> <br>
-                </fieldset>
-                <!--Contact person 3-->
-                <fieldset>
-                    <legend> ضابط الاتصال الثالث</legend>
-                    <input type="text" placeholder="الرقم المدني ضابط الاتصال" id="myContactPerson_civil-ID_3"
-                        name="ContactPerson_civil-ID_3"> <br>
-                    <input type="text" placeholder="اسم ضابط الاتصال" id="myContactPerson_name_3"
-                        name="ContactPerson_name_3"> <br>
-                    <input type="text" placeholder="رقم ضابط الاتصال" id="myContactPerson_phone_3"
-                        name="ContactPerson_phone_3"> <br>
-                    <input type="email" placeholder="البريد الالكتروني لضابط الاتصال" id="myContactPerson_email_3"
-                        name="ContactPerson_email_3"> <br>
-                </fieldset>
-
-            </fieldset>
-        </div>
+    <br />
+    <section id="OTP_Screen" style="display: none">
+      <center>
+        <h1>رمز التحقق OTP</h1>
+        <fieldset>
+          <div class="container" id="CorporateOtp">
+            <label for="usmsotp"><b>OTP رقم الهاتف</b></label>
+            <input
+              type="text"
+              placeholder="Enter SMS OTP"
+              name="usmsotp"
+              required
+            />
+            <button type="submit" id="btn_smsotp">تحقق SMS</button>
+            <br />
+            <label for="uemailotp"><b>OTP البريد الالكتروني</b></label>
+            <input
+              type="text"
+              placeholder="Enter Email OTP"
+              name="uemailotp"
+              required
+            />
+            <button type="submit" id="btn_emailotp">تحقق Email</button>
+          </div>
+        </fieldset>
+      </center>
     </section>
-    <br>
-<script>
-    function myFunction_hidden(target_section){
+    <br />
+    <section id="Authorized_Training_Center_Screen" style="display: none">
+      <center>
+        <h1>تسجيل / تحديث بيانات جهات التدريب</h1>
+        <p>يرجى تعبأة البيانات كاملة وسيتم التواصل خلال 15 يوم عمل.</p>
+      </center>
+
+      <div class="container" id="Authorized_Training_Center" dir="rtl">
+        <form action="/#">
+          <!--based info-->
+          <fieldset>
+            <legend><b>المعلومات الاساسية</b></legend>
+            <label for="ucorporateName"><b>اسم الجهة</b></label>
+            <input
+              type="text"
+              placeholder="Enter Corporate Name"
+              name="ucorporateName"
+              required
+            />
+            <br />
+            <label for="ucorporateCommerialNumber"><b>الرقم التجاري</b></label>
+            <input
+              type="text"
+              placeholder="Enter Corporate Name"
+              name="ucorporateCommerialNumber"
+              required
+            />
+            <br />
+            <label for="ucorporateCivilID"><b>الرقم المدني</b></label>
+            <input
+              type="text"
+              placeholder="Enter Corporate Civil ID"
+              name="ucorporateCivilID"
+              required
+            />
+            <br />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend><b> رفع المستندات </b></legend>
+            <!--وزارة التجارة-->
+            <label>Upload - الرخصة التجارية من وزارة التجارة والصناعة</label
+            ><br />
+            <input type="file" id="myFile" name="filename" />
+
+            <br />
+            <!--وزارة العدل-->
+            <label>Upload - شهادة عقد التأسيس والترخيص من وزارة العدل</label
+            ><br />
+            <input type="file" id="myFile" name="filename" />
+
+            <br />
+            <!--الهيئة العاملة للمعلومات المدنية -->
+            <label
+              >Upload - شهادة من الهيئة العامة للمعلومات المدنية (الرقم
+              المدني)</label
+            ><br />
+            <input type="file" id="myFile" name="filename" />
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <b> طبيعة النشاط </b>
+            </legend>
+            <ul>
+              <li>
+                <input type="checkbox" id="Traingings_management" />
+                دورات ادارية
+              </li>
+              <li>
+                <input type="checkbox" id="Traingings_engineering" />
+                دورات هندسية
+              </li>
+              <li>
+                <input type="checkbox" id="Traingings_technology" />
+                دورات تكنولوجية
+              </li>
+              <li>
+                <input type="checkbox" id="Traingings_financial" />
+                دورات مالية
+              </li>
+            </ul>
+          </fieldset>
+        </form>
+        <fieldset>
+          <legend>
+            <b> العنوان </b>
+          </legend>
+          <input type="text" placeholder="المنطقة" id="myArea" name="area" />
+          <br />
+          <input type="text" placeholder="القطعة" id="myArea" name="area" />
+          <br />
+          <input type="text" placeholder="الشارع" id="myArea" name="area" />
+          <br />
+          <input type="text" placeholder="القطعة" id="myArea" name="area" />
+          <br />
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            <b> المعلومات البنكية </b>
+          </legend>
+          <input
+            type="text"
+            placeholder="رقم الحساب البنكي بصيغة الايبان"
+            id="myIBAN"
+            name="IBAN"
+          />
+          <br />
+          <!--المعلومات البنكية-->
+          <label>Upload - رقم الحساب البنكي بصيغة الايبان</label><br />
+          <input type="file" id="myFile" name="filename" />
+        </fieldset>
+
+        <br />
+
+        <fieldset>
+          <legend>
+            <b> بيانات التواصل (الايميل) </b>
+          </legend>
+
+          <!--Contact person 1-->
+          <fieldset>
+            <legend>ضابط الاتصال الاول</legend>
+            <input
+              type="text"
+              placeholder="الرقم المدني  ضابط الاتصال"
+              id="myContactPerson_civil-ID_1"
+              name="ContactPerson_civil-ID_1"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="اسم ضابط الاتصال"
+              id="myContactPerson_name_1"
+              name="ContactPerson_name_1"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="رقم ضابط الاتصال"
+              id="myContactPerson_phone_1"
+              name="ContactPerson_phone_1"
+            />
+            <br />
+            <input
+              type="email"
+              placeholder="البريد الالكتروني لضابط الاتصال"
+              id="myContactPerson_email_1"
+              name="ContactPerson_email_1"
+            />
+            <br />
+          </fieldset>
+
+          <!--Contact person 2-->
+          <fieldset>
+            <legend>ضابط الاتصال الثاني</legend>
+            <input
+              type="text"
+              placeholder="الرقم المدني لضابط الاتصال"
+              id="myContactPerson_civil-ID_2"
+              name="ContactPerson_civil-ID_2"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="اسم ضابط الاتصال"
+              id="myContactPerson_name_2"
+              name="ContactPerson_name_2"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="رقم ضابط الاتصال"
+              id="myContactPerson_phone_2"
+              name="ContactPerson_phone_2"
+            />
+            <br />
+            <input
+              type="email"
+              placeholder="البريد الالكتروني لضابط الاتصال"
+              id="myContactPerson_email_2"
+              name="ContactPerson_email_2"
+            />
+            <br />
+          </fieldset>
+          <!--Contact person 3-->
+          <fieldset>
+            <legend>ضابط الاتصال الثالث</legend>
+            <input
+              type="text"
+              placeholder="الرقم المدني ضابط الاتصال"
+              id="myContactPerson_civil-ID_3"
+              name="ContactPerson_civil-ID_3"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="اسم ضابط الاتصال"
+              id="myContactPerson_name_3"
+              name="ContactPerson_name_3"
+            />
+            <br />
+            <input
+              type="text"
+              placeholder="رقم ضابط الاتصال"
+              id="myContactPerson_phone_3"
+              name="ContactPerson_phone_3"
+            />
+            <br />
+            <input
+              type="email"
+              placeholder="البريد الالكتروني لضابط الاتصال"
+              id="myContactPerson_email_3"
+              name="ContactPerson_email_3"
+            />
+            <br />
+          </fieldset>
+        </fieldset>
+      </div>
+    </section>
+    <br />
+    <section id="Courses_Screen" style="display: none">
+      <center>
+        <a href="Draft_courses_Ar.html" style="color: dodgerblue"
+          >إدارة الدورات
+        </a>
+      </center>
+    </section>
+    <br />
+
+    <script>
+      function myFunction_hidden(target_section) {
         var x = document.getElementById(target_section);
-        if (x.style.display === "none"){
-            x.style.display = "block";
-        }else{
-            x.style.display = "none";
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
         }
-    }
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <title>إدارة الدورات</title>
+    <style>
+      body {
+        font-family: "Tajawal", Arial, sans-serif;
+        margin: 40px;
+        background: #f9f9f9;
+      }
+      section {
+        margin-bottom: 40px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+        background: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: right;
+      }
+      th {
+        background: #f4f4f4;
+      }
+      .btn {
+        padding: 6px 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+      }
+      .btn-edit {
+        background: #e7e700;
+      }
+      .btn-save {
+        background: #4caf50;
+        color: #fff;
+      }
+      .btn-delete {
+        background: #f44336;
+        color: #fff;
+      }
+      .btn-cancel {
+        background: #ccc;
+        color: #333;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 6px;
+        margin-top: 2px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      td input,
+      td select {
+        width: auto;
+        min-width: 110px;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section>
+      <h2>إضافة دورة جديدة</h2>
+      <form id="addCourseForm">
+        <label
+          >اسم الدورة:
+          <input type="text" id="courseName" required />
+        </label>
+        <label
+          >اسم المدرب:
+          <input type="text" id="instructor" required />
+        </label>
+        <label
+          >تاريخ بدء التسجيل:
+          <input type="date" id="regOpen" required />
+        </label>
+        <label
+          >تاريخ نهاية التسجيل:
+          <input type="date" id="regEnd" required />
+        </label>
+        <label
+          >الموقع (فندق في الكويت):
+          <select id="location" required>
+            <option value="">اختر فندقًا</option>
+            <option
+              value="فندق ومنتجع جميرا شاطئ المسيلة - Jumeirah Messilah Beach Hotel & Spa"
+            >
+              فندق ومنتجع جميرا شاطئ المسيلة - Jumeirah Messilah Beach Hotel &
+              Spa
+            </option>
+            <option
+              value="فندق فور سيزونز الكويت برج الشايع - Four Seasons Hotel Kuwait at Burj Alshaya"
+            >
+              فندق فور سيزونز الكويت برج الشايع - Four Seasons Hotel Kuwait at
+              Burj Alshaya
+            </option>
+            <option value="فندق جراند حياة الكويت - Grand Hyatt Kuwait">
+              فندق جراند حياة الكويت - Grand Hyatt Kuwait
+            </option>
+            <option value="فندق شيراتون الكويت - Sheraton Kuwait">
+              فندق شيراتون الكويت - Sheraton Kuwait
+            </option>
+            <option value="فندق وسبا النخيل - The Palms Beach Hotel & Spa">
+              فندق وسبا النخيل - The Palms Beach Hotel & Spa
+            </option>
+            <option
+              value="فندق سيمفوني ستايل الكويت - Symphony Style Hotel Kuwait"
+            >
+              فندق سيمفوني ستايل الكويت - Symphony Style Hotel Kuwait
+            </option>
+            <option value="منتجع هيلتون الكويت - Hilton Kuwait Resort">
+              منتجع هيلتون الكويت - Hilton Kuwait Resort
+            </option>
+            <option
+              value="منتجع و فندق موفنبيك البدع - Movenpick Hotel & Resort Al Bida'a"
+            >
+              منتجع و فندق موفنبيك البدع - Movenpick Hotel & Resort Al Bida'a
+            </option>
+            <option value="فندق الريجنسي الكويت - The Regency Hotel Kuwait">
+              فندق الريجنسي الكويت - The Regency Hotel Kuwait
+            </option>
+            <option value="فندق راديسون بلو الكويت - Radisson Blu Hotel Kuwait">
+              فندق راديسون بلو الكويت - Radisson Blu Hotel Kuwait
+            </option>
+          </select>
+        </label>
+        <button type="submit" class="btn">إضافة الدورة</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>قائمة الدورات</h2>
+      <table id="coursesTable">
+        <thead>
+          <tr>
+            <th>اسم الدورة</th>
+            <th>اسم المدرب</th>
+            <th>بداية التسجيل</th>
+            <th>نهاية التسجيل</th>
+            <th>الفندق</th>
+            <th>تعديل</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <script>
+      let courses = [];
+      let editIndex = null; // مؤشر الصف الذي يتم تعديله حاليًا
+
+      document.getElementById("addCourseForm").onsubmit = function (e) {
+        e.preventDefault();
+        const name = document.getElementById("courseName").value.trim();
+        const instructor = document.getElementById("instructor").value.trim();
+        const regOpen = document.getElementById("regOpen").value;
+        const regEnd = document.getElementById("regEnd").value;
+        const location = document.getElementById("location").value;
+
+        if (!location) {
+          alert("يرجى اختيار الفندق.");
+          return;
+        }
+
+        courses.push({ name, instructor, regOpen, regEnd, location });
+        this.reset();
+        renderCourses();
+      };
+
+      function renderCourses() {
+        const tbody = document
+          .getElementById("coursesTable")
+          .getElementsByTagName("tbody")[0];
+        tbody.innerHTML = "";
+        courses.forEach((course, idx) => {
+          if (editIndex === idx) {
+            // عرض وضع التعديل داخل الجدول
+            tbody.innerHTML += `
+                    <tr>
+                        <td><input type="text" id="editName" value="${
+                          course.name
+                        }"></td>
+                        <td><input type="text" id="editInstructor" value="${
+                          course.instructor
+                        }"></td>
+                        <td><input type="date" id="editRegOpen" value="${
+                          course.regOpen
+                        }"></td>
+                        <td><input type="date" id="editRegEnd" value="${
+                          course.regEnd
+                        }"></td>
+                        <td>
+                            <select id="editLocation" required>
+                                <option value="">اختر فندقًا</option>
+                                <option value="فندق ومنتجع جميرا شاطئ المسيلة - Jumeirah Messilah Beach Hotel & Spa" ${
+                                  course.location ==
+                                  "فندق ومنتجع جميرا شاطئ المسيلة - Jumeirah Messilah Beach Hotel & Spa"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق ومنتجع جميرا شاطئ المسيلة - Jumeirah Messilah Beach Hotel & Spa
+                                </option>
+                                <option value="فندق فور سيزونز الكويت برج الشايع - Four Seasons Hotel Kuwait at Burj Alshaya" ${
+                                  course.location ==
+                                  "فندق فور سيزونز الكويت برج الشايع - Four Seasons Hotel Kuwait at Burj Alshaya"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق فور سيزونز الكويت برج الشايع - Four Seasons Hotel Kuwait at Burj Alshaya
+                                </option>
+                                <option value="فندق جراند حياة الكويت - Grand Hyatt Kuwait" ${
+                                  course.location ==
+                                  "فندق جراند حياة الكويت - Grand Hyatt Kuwait"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق جراند حياة الكويت - Grand Hyatt Kuwait
+                                </option>
+                                <option value="فندق شيراتون الكويت - Sheraton Kuwait" ${
+                                  course.location ==
+                                  "فندق شيراتون الكويت - Sheraton Kuwait"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق شيراتون الكويت - Sheraton Kuwait
+                                </option>
+                                <option value="فندق وسبا النخيل - The Palms Beach Hotel & Spa" ${
+                                  course.location ==
+                                  "فندق وسبا النخيل - The Palms Beach Hotel & Spa"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق وسبا النخيل - The Palms Beach Hotel & Spa
+                                </option>
+                                <option value="فندق سيمفوني ستايل الكويت - Symphony Style Hotel Kuwait" ${
+                                  course.location ==
+                                  "فندق سيمفوني ستايل الكويت - Symphony Style Hotel Kuwait"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق سيمفوني ستايل الكويت - Symphony Style Hotel Kuwait
+                                </option>
+                                <option value="منتجع هيلتون الكويت - Hilton Kuwait Resort" ${
+                                  course.location ==
+                                  "منتجع هيلتون الكويت - Hilton Kuwait Resort"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    منتجع هيلتون الكويت - Hilton Kuwait Resort
+                                </option>
+                                <option value="منتجع و فندق موفنبيك البدع - Movenpick Hotel & Resort Al Bida'a" ${
+                                  course.location ==
+                                  "منتجع و فندق موفنبيك البدع - Movenpick Hotel & Resort Al Bida'a"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    منتجع و فندق موفنبيك البدع - Movenpick Hotel & Resort Al Bida'a
+                                </option>
+                                <option value="فندق الريجنسي الكويت - The Regency Hotel Kuwait" ${
+                                  course.location ==
+                                  "فندق الريجنسي الكويت - The Regency Hotel Kuwait"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق الريجنسي الكويت - The Regency Hotel Kuwait
+                                </option>
+                                <option value="فندق راديسون بلو الكويت - Radisson Blu Hotel Kuwait" ${
+                                  course.location ==
+                                  "فندق راديسون بلو الكويت - Radisson Blu Hotel Kuwait"
+                                    ? "selected"
+                                    : ""
+                                }>
+                                    فندق راديسون بلو الكويت - Radisson Blu Hotel Kuwait
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-save" onclick="saveEdit(${idx})">حفظ</button>
+                            <button class="btn btn-cancel" onclick="cancelEdit()">إلغاء</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-delete" onclick="deleteCourse(${idx})">حذف</button>
+                        </td>
+                    </tr>
+                `;
+          } else {
+            tbody.innerHTML += `
+                    <tr>
+                        <td>${course.name}</td>
+                        <td>${course.instructor}</td>
+                        <td>${course.regOpen}</td>
+                        <td>${course.regEnd}</td>
+                        <td>${course.location}</td>
+                        <td>
+                            <button class="btn btn-edit" onclick="startEdit(${idx})">تعديل</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-delete" onclick="deleteCourse(${idx})">حذف</button>
+                        </td>
+                    </tr>
+                `;
+          }
+        });
+      }
+
+      function startEdit(idx) {
+        editIndex = idx;
+        renderCourses();
+      }
+      function cancelEdit() {
+        editIndex = null;
+        renderCourses();
+      }
+      function saveEdit(idx) {
+        const name = document.getElementById("editName").value.trim();
+        const instructor = document
+          .getElementById("editInstructor")
+          .value.trim();
+        const regOpen = document.getElementById("editRegOpen").value;
+        const regEnd = document.getElementById("editRegEnd").value;
+        const location = document.getElementById("editLocation").value;
+        if (!location) {
+          alert("يرجى اختيار الفندق.");
+          return;
+        }
+        courses[idx] = { name, instructor, regOpen, regEnd, location };
+        editIndex = null;
+        renderCourses();
+      }
+      function deleteCourse(idx) {
+        if (confirm("هل أنت متأكد من حذف هذه الدورة؟")) {
+          courses.splice(idx, 1);
+          editIndex = null;
+          renderCourses();
+        }
+      }
+
+      // Initial render
+      renderCourses();
+    </script>
+  </body>
+</html>
